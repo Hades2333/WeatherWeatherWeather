@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CustomTableViewCell: UITableViewCell {
 
@@ -14,6 +15,14 @@ class CustomTableViewCell: UITableViewCell {
     static var identifier = "CustomTableViewCell"
 
     //MARK: - GUI Variables
+
+    lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.hidesWhenStopped = true
+        spinner.color = .black
+        spinner.style = .large
+        return spinner
+    }()
 
     private let weatherImage: UIImageView = {
         let view = UIImageView()
@@ -94,7 +103,16 @@ class CustomTableViewCell: UITableViewCell {
     }
 
     func configure(withModel model: TableModel) {
-        self.weatherImage.image = UIImage.donwload(model.image)
+
+        weatherImage.addSubview(spinner)
+        spinner.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        let url = URL(string: "https://openweathermap.org/img/wn/\(model.image).png")
+        self.weatherImage.sd_setImage(with: url) { (image, error, cashe, url) in
+            self.spinner.removeFromSuperview()
+        }
+
         self.timeLabel.text = model.time
         self.conditionLabel.text = model.description
         self.temperatureLabel.text = "\(model.temperature)°"

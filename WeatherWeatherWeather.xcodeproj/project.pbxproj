@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14ACA06D266C0798009F7668 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 14ACA06C266C0798009F7668 /* SDWebImage */; };
 		14C10F14266B72BB00013EC9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C10F13266B72BB00013EC9 /* NetworkManager.swift */; };
 		14C10F16266B72D500013EC9 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C10F15266B72D500013EC9 /* NetworkError.swift */; };
 		14C10F18266B73E100013EC9 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C10F17266B73E100013EC9 /* WeatherModel.swift */; };
@@ -68,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14ACA06D266C0798009F7668 /* SDWebImage in Frameworks */,
 				14F76D44266A74B800D3341D /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +207,7 @@
 			name = WeatherWeatherWeather;
 			packageProductDependencies = (
 				14F76D43266A74B800D3341D /* SnapKit */,
+				14ACA06C266C0798009F7668 /* SDWebImage */,
 			);
 			productName = WeatherWeatherWeather;
 			productReference = 14F76D1D266A6E1200D3341D /* WeatherWeatherWeather.app */;
@@ -235,6 +238,7 @@
 			mainGroup = 14F76D14266A6E1200D3341D;
 			packageReferences = (
 				14F76D42266A74B800D3341D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				14ACA06B266C0798009F7668 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 14F76D1E266A6E1200D3341D /* Products */;
 			projectDirPath = "";
@@ -479,6 +483,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		14ACA06B266C0798009F7668 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
 		14F76D42266A74B800D3341D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -490,6 +502,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		14ACA06C266C0798009F7668 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14ACA06B266C0798009F7668 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
 		14F76D43266A74B800D3341D /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 14F76D42266A74B800D3341D /* XCRemoteSwiftPackageReference "SnapKit" */;
