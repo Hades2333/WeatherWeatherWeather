@@ -23,7 +23,7 @@ final class TodayPresenter: NSObject, TodayViewPresenter {
 
     var view: TodayView!
     private var locationManager: CLLocationManager?
-        private var currentLocation: CLLocation?
+    private var currentLocation: CLLocation?
     private var networkManager = NetworkManager()
 
     //MARK: Initialization
@@ -46,24 +46,25 @@ final class TodayPresenter: NSObject, TodayViewPresenter {
     private func requestTheWeather() {
 
         view.startSpinner()
+
         guard let lat = currentLocation?.coordinate.latitude,
               let long = currentLocation?.coordinate.longitude else { return }
 
         networkManager.request(lat: lat, long: long,
-                                      successHandler: { [weak self] (model: Response) in
+                               successHandler: { [weak self] (model: Response) in
 
-                                        guard let self = self else { return }
+                                guard let self = self else { return }
 
-                                        //MARK: !!! There is a special delay to show that the UI is not blocked
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
-                                            fetchedModel = model
-                                            self?.view.updateUI()
-                                            self?.view.stopSpinner()
-                                        }
-                                      },
-                                      errorHandler: { (error: NetworkError) in
-                                        fatalError(error.localizedDescription)
-                                      })
+                                //MARK: !!! There is a special delay to show that the UI is not blocked
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                                    fetchedModel = model
+                                    self?.view.updateUI()
+                                    self?.view.stopSpinner()
+                                }
+                               },
+                               errorHandler: { (error: NetworkError) in
+                                fatalError(error.localizedDescription)
+                               })
     }
 
     //MARK: configure methods
@@ -92,7 +93,7 @@ final class TodayPresenter: NSObject, TodayViewPresenter {
 
     func getShareInformation() -> String? {
         if let model = fetchedModel {
-        return """
+            return """
         You are situated in \(model.city.name), \(model.city.country)
         Today is \(String.convertToDay(date: model.list[0].dtTxt)).
         Mostly \(model.list[0].weather[0].main) and the temperature is \(model.list[0].main.temp) degrees.

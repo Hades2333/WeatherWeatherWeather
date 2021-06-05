@@ -13,7 +13,6 @@ struct Images {
     static let rainbow = "rainbow"
     static let sunIcon = "sun.max"
     static let selectedSunIcon = "sun.max.fill"
-    
     static let cloudIcon = "cloud.moon.bolt"
     static let selectedCloudIcon = "cloud.moon.bolt.fill"
 }
