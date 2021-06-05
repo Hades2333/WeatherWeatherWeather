@@ -108,7 +108,6 @@ class TodayViewController: UIViewController, TodayView {
             make.top.equalTo(customMid.snp.bottom).offset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
-
     }
 
     //MARK: Actions
