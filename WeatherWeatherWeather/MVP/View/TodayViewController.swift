@@ -9,7 +9,9 @@ import UIKit
 import SnapKit
 
 protocol TodayView {
-
+    func updateUI()
+    func startSpinner()
+    func stopSpinner()
 }
 
 class TodayViewController: UIViewController, TodayView {
@@ -18,7 +20,7 @@ class TodayViewController: UIViewController, TodayView {
 
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
-        spinner.startAnimating()
+        spinner.hidesWhenStopped = true
         spinner.color = .black
         spinner.style = .large
         return spinner
@@ -75,7 +77,7 @@ class TodayViewController: UIViewController, TodayView {
     private func configureGUI() {
 
         view.backgroundColor = .secondarySystemBackground
-        self.view.addSubviews([headerLabel, colorLine, customTop, customMid, shareButton])
+        self.view.addSubviews([headerLabel, colorLine, customTop, customMid, shareButton, spinner])
 
         let myOffset = 10
 
@@ -108,11 +110,47 @@ class TodayViewController: UIViewController, TodayView {
             make.top.equalTo(customMid.snp.bottom).offset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
+
+        spinner.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+
+    func updateUI() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let image = self.presenter.getBigImage()
+            let place = self.presenter.getPlaceText()
+            let temp = self.presenter.getTempText()
+            let textArray = self.presenter.getLittleLabels()
+            self.customTop.setValuesFor(image: image, placeText: place, temperatureText: temp)
+            self.customMid.setValuesWith(text: textArray)
+        }
+    }
+
+    func startSpinner() {
+        spinner.startAnimating()
+    }
+
+    func stopSpinner() {
+        spinner.stopAnimating()
     }
 
     //MARK: Actions
 
     @objc func sharePressed() {
-
+        guard let myMessage = presenter.getShareInformation() else {
+            let alert = UIAlertController(title: "Weather info",
+                                          message: "nothing to show",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            self.present(alert, animated: true)
+            return
+        }
+        let alert = UIAlertController(title: "Weather info",
+                                      message: myMessage,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert, animated: true)
     }
 }

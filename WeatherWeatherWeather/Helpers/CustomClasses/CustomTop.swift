@@ -85,5 +85,12 @@ class CustomTop: UIView {
 
         }
     }
+
+    //MARK: Configure method
     
+    func setValuesFor(image: String, placeText: String, temperatureText: String) {
+        self.bigImage.image = UIImage.donwload(image)
+        self.placeLabel.text = placeText
+        self.temperatureLabel.text = temperatureText
+    }
 }

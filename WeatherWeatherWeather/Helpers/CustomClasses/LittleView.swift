@@ -58,11 +58,15 @@ class LittleView: UIView {
         }
     }
 
-    func setValusFor(image: UIImage?, text: String?) {
-        if let image = image {
-            self.littleImage.image = image
-        } else if let text = text {
+    func setTextWith(text: String?) {
+        if let text = text {
             self.littleLabel.text = text
         }
+    }
+
+    func setImageWith(image: String) {
+        self.littleImage.image = UIImage(systemName: image)?.withTintColor(.systemYellow,
+                                                                      renderingMode: .alwaysOriginal) ??
+            UIImage(named: Images.sun)!
     }
 }

@@ -91,5 +91,21 @@ class CustomMid: UIView {
             make.height.equalTo(2)
             make.bottom.equalToSuperview().offset(-10)
         }
+
+        rain.setImageWith(image: "cloud.rain")
+        humidity.setImageWith(image: "drop")
+        temperature.setImageWith(image: "lineweight")
+        wind.setImageWith(image: "wind")
+        direction.setImageWith(image: "circle")
+    }
+
+    //MARK: Configure method
+
+    func setValuesWith(text: [String]) {
+        rain.setTextWith(text: text[0])
+        humidity.setTextWith(text: text[1])
+        temperature.setTextWith(text: text[2])
+        wind.setTextWith(text: text[3])
+        direction.setTextWith(text: text[4])
     }
 }
