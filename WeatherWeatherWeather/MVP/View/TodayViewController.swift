@@ -142,15 +142,17 @@ class TodayViewController: UIViewController, TodayView {
         guard let myMessage = presenter.getShareInformation() else {
             let alert = UIAlertController(title: "Weather info",
                                           message: "nothing to show",
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+                                          preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
             self.present(alert, animated: true)
             return
         }
         let alert = UIAlertController(title: "Weather info",
                                       message: myMessage,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+                                      preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
         self.present(alert, animated: true)
     }
 }
+
+
