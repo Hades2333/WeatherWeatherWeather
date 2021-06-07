@@ -15,4 +15,5 @@ struct Images {
     static let selectedSunIcon = "sun.max.fill"
     static let cloudIcon = "cloud.moon.bolt"
     static let selectedCloudIcon = "cloud.moon.bolt.fill"
+    static let shareIcon = "cloud.sun.fill"
 }

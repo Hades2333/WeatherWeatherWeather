@@ -139,19 +139,14 @@ class TodayViewController: UIViewController, TodayView {
     //MARK: Actions
 
     @objc func sharePressed() {
-        guard let myMessage = presenter.getShareInformation() else {
-            let alert = UIAlertController(title: "Weather info",
-                                          message: "nothing to show",
-                                          preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-            self.present(alert, animated: true)
-            return
+        let shareText = presenter.getShareInformation() ?? "nothing to show"
+        let vc = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
+
+        if let popOver = vc.popoverPresentationController {
+            popOver.sourceView = view
+            popOver.sourceView?.center = view.center
         }
-        let alert = UIAlertController(title: "Weather info",
-                                      message: myMessage,
-                                      preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-        self.present(alert, animated: true)
+        self.present(vc, animated: true)
     }
 }
 
